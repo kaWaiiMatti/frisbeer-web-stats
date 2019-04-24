@@ -1,0 +1,197 @@
+body {
+    padding-top: 60px;
+}
+
+html {
+    position: relative;
+}
+
+body,
+html,
+.container-fluid,
+.container-fluid > div {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.container-fluid > div {
+    padding-top: 15px;
+}
+
+/* TABLE SORTING ELEMENTS */
+table > thead > tr > th[data-sort-type] {
+    color: blue;
+}
+
+table > thead > tr > th[data-sort-type] > span.glyphicon {
+    padding-left: 3px;
+    top: 3px;
+}
+
+/* BUTTONS ON TOP OF EACH OTHER */
+td > input[type='button'],
+td > button {
+    margin-bottom: 10px;
+}
+
+/* RANK IMAGES */
+#players-table img {
+    max-height: 2.25em;
+}
+
+/* PLAYERS TABLE SPECIFIC */
+#players-table[data-show-no-rank='false'] > tbody > tr[data-no-rank='true'] {
+    display: none;
+}
+
+/* MODALS */
+select + select {
+    margin-top: 10px;
+}
+
+.modal-body .form-group p {
+    margin-top: 5px;
+}
+
+.modal-body ul {
+    padding-left: 20px;
+}
+
+/* GENERIC CLASSES */
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+button.float-right + button.float-right {
+    margin-right: 6px;
+}
+
+.error-text {
+    color: red;
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+.transition {
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+/* HEADER */
+header {
+    background-color: white;
+    border-color: #204d74;
+    border-bottom-style: solid;
+    height: 60px;
+    padding: 11px 15px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+@media (min-width: 768px) {
+    header {
+    }
+}
+
+/* MENU */
+.side-menu {
+    background-color: white;
+    border-color: #204d74;
+    border-right-style: solid;
+    height: calc(100% - 60px);
+    overflow: hidden;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    width: 70%;
+    z-index: 10;
+}
+
+@media (max-width: 767px) {
+    .side-menu {
+        left: -100%;
+        position: fixed;
+    }
+}
+
+@media (min-width: 768px) {
+    .side-menu {
+        display: inline-block;
+        width: 200px;
+    }
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu > ul.menu-items {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.side-menu > ul.menu-items > li + li {
+    border-top-color: lightgrey;
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.side-menu > ul.menu-items > li > a {
+    color: black;
+    display: block;
+    padding: 15px 10px;
+    text-align: center;
+}
+
+.side-menu > ul.menu-items > li.active {
+    background-color: #8c8c8c;
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+    .side-menu {
+        width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .side-menu {
+        height: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .container-fluid {
+        display: inline-block;
+        margin-left: 0;
+        margin-right: 0;
+        width: calc(99% - 200px);
+    }
+}
+
+/* LOADER SCREEN */
+.loader-icon {
+    position: fixed;
+}
+
+.loader-icon,
+.loader-icon > table {
+    background-color: rgba(196, 196, 196, 0.5);
+    height: 100%;
+    margin-left: -15px;
+    width: 100%;
+    z-index: 3;
+}
+
+.loader-icon > table td {
+    text-align: center;
+}
+
+.glyphicon-map-marker {
+    font-size: 2.25em;
+    color: blue;
+}

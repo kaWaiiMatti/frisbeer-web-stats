@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Frisbeer ELO Score API client" />
+    <meta name="keywords" content="frisbeer, api, client, responsive" />
+
+    <title>Frisbeer ELO score client</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/ol.css">
+    <link rel="stylesheet" type="text/css" href="css/client.css">
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/ol-debug.js"></script>
+    <!-- <script src="js/jquery.dataTables.min.js"></script> -->
+    <script src="js/base.js"></script>
+    <script src="js/players.js"></script>
+    <script src="js/locations.js"></script>
+    <script src="js/games.js"></script>
+</head>
+
+<header>
+    <button class="btn btn-primary float-left visible-xs" data-toggle-menu="true">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </button>
+    <h4 class="title float-right">Frisbeer Score</h4>
+</header>
+
+<body>
+    <div class="side-menu">
+        <ul class="menu-items">
+            <li><a data-target-tab="players">Players</a></li>
+            <li><a data-target-tab="games">Games</a></li>
+            <li><a data-target-tab="locations">Locations</a></li>
+            <li><a data-target-tab="login" data-logged-in="false">Login</a></li>
+            <li><a data-target-tab="logout" data-logged-in="true">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="container-fluid">
+        <div id="players">
+
+            <button id="refresh-players" class="btn btn-primary float-right">Refresh</button>
+            <button id="add-new-player" class="btn btn-primary float-right" data-logged-in="true">Add new</button>
+            <button id="show-players-without-rank" class="btn btn-primary float-right">
+                <span class="glyphicon glyphicon-check"></span> Show without rank
+            </button>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Players</h3>
+                    <table id="players-table" class="table table-striped" data-show-no-rank="true">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="games">
+            <button id="refresh-games" class="btn btn-primary float-right">Refresh</button>
+            <button id="add-new-game" class="btn btn-primary float-right" data-logged-in="true">Play game</button>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Games</h3>
+                    <table id="games-table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Start time</th>
+                                <th>Location</th>
+                                <th>Players</th>
+                                <th>State</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="locations">
+
+            <button id="refresh-locations" class="btn btn-primary float-right">Refresh</button>
+            <button id="add-new-location" class="btn btn-primary float-right" data-logged-in="true">Add new location</button>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Locations</h3>
+                    <table id="locations-table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Coordinates</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
