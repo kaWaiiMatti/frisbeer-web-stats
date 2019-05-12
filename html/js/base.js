@@ -22,6 +22,15 @@ $(document).ready(function () {
             fbc.players.updateTable();
             fbc.games.updateTable();
             fbc.locations.updateTable();
+
+            Object.values(fbc.data.games).forEach(function (game) {
+                game.team1.forEach(function (playerId) {
+                    fbc.data.players[playerId].addGame(game);
+                });
+                game.team2.forEach(function (playerId) {
+                    fbc.data.players[playerId].addGame(game);
+                });
+            });
         }
     };
 

@@ -33,7 +33,7 @@
             $('#players-table')
                 .children('tbody')
                 .first()
-                .html(players.map(player => player.renderTableRow()));
+                .html(players.map(player => player.renderTableRow(fbc.base.parameters.currentSeason)));
         },
         toggleShowNoRank: function () {
             var currentState =
