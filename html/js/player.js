@@ -8,7 +8,7 @@ class Player {
 
         // alltime stats are season 0
         this.seasons = {
-            0: new PlayerStats()
+            0: new PlayerStats(this.id)
         };
 
         this.dialog = null;
@@ -19,7 +19,7 @@ class Player {
         this.seasons[0].addGame(game);
 
         if (!this.seasons.hasOwnProperty(game.season)) {
-            this.seasons[game.season] = new PlayerStats();
+            this.seasons[game.season] = new PlayerStats(this.id);
         }
 
         this.seasons[game.season].addGame(game);
@@ -67,27 +67,15 @@ class Player {
 
     openDialog(seasonId) {
         // renders player stats dialog content
-        var stats = this.seasons[seasonId];
+        let stats = this.seasons[seasonId];
 
         this.dialog = new Dialog({
             header: this.name,
-            body: [$('<div>', {
-                'class': 'row',
-                html: [
-                    $('<div>', {
-                        'class': 'col-xs-6',
-                        html: $('<p>', {
-                            text: 'Games total'
-                        })
-                    }),
-                    $('<div>', {
-                        'class': 'col-xs-6',
-                        html: $('<p>', {
-                            text: stats.games
-                        })
-                    })
-                ]
-            })]
+            body: [
+                Dialog.renderStatsRow('Games', stats.games),
+                Dialog.renderStatsRow('Wins', stats.wins),
+                Dialog.renderStatsRow('Losses', stats.losses)
+            ]
         });
 
         this.dialog.open();
@@ -110,5 +98,11 @@ class PlayerStats {
 
     addGame(game) {
         this.games++;
+
+        if (game.winners.includes(this.player)) {
+            this.wins++;
+        } else {
+            this.losses++;
+        }
     }
 }

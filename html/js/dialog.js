@@ -62,4 +62,24 @@ class Dialog {
         $('body').append(this.element);
         this.element.modal();
     }
+
+    static renderStatsRow(text, value) {
+        return $('<div>', {
+            'class': 'row',
+            html: [
+                $('<div>', {
+                    'class': 'col-xs-6',
+                    html: $('<p>', {
+                        text: text
+                    })
+                }),
+                $('<div>', {
+                    'class': 'col-xs-6',
+                    html: $('<p>', {
+                        text: value
+                    })
+                })
+            ]
+        })
+    }
 }
