@@ -18,6 +18,12 @@ html,
     padding-top: 15px;
 }
 
+/* CHART */
+.chart canvas {
+    height: 200px;
+    width: 100%;
+}
+
 /* TABLE SORTING ELEMENTS */
 table > thead > tr > th[data-sort-type] {
     color: blue;

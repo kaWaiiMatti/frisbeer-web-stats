@@ -82,4 +82,14 @@ class Dialog {
             ]
         })
     }
+
+    static renderChartRow() {
+        return $('<div>', {
+            'class': 'row',
+            html: $('<div>', {
+                'class': 'col-xs-12 chart',
+                html: $('<canvas>')
+            })
+        });
+    }
 }

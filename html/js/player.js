@@ -69,13 +69,89 @@ class Player {
         // renders player stats dialog content
         let stats = this.seasons[seasonId];
 
+        let chartRow = Dialog.renderChartRow();
+        let options = {
+            title: {
+                display: true,
+                text: 'Win percentage'
+            },
+            scales: {
+                xAxes: [{
+                    id: 'Date',
+                    type: 'time'
+                }],
+                yAxes: [{
+                    id: 'ZeroToHundred',
+                    type: 'linear',
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        stepSize: 20
+                    }
+                }]
+            },
+            legend: {
+                display: false
+            }
+        };
+
+        let games = stats.games.map(gameId => fbc.data.games[gameId]);
+        games.sort(fbc.base.sorting.date);
+
+        let labels = [];
+        let data = [];
+        let winPercentageStats = new PlayerStatsWinPercentage(this.id);
+
+        let previousDate = null;
+
+        games.forEach(function (game) {
+            // TODO: OMA LUOKKA ERILAISILLE LABELEILLE??
+            /*let year = game.date.getYear();
+            let month = game.date.getMonth();
+            let date = game.date.getDate();
+
+            if (previousDate !== null && previousDate.year === year && previousDate.month === month && previousDate.date === date) {
+                labels.pop();
+                winPercentageStats.pop();
+            }
+
+            previousDate = {
+                year: year,
+                month: month,
+                date: date
+            };*/
+
+            labels.push(game.date);
+            winPercentageStats.addGame(game);
+            data.push(winPercentageStats.getValue());
+        });
+
+        let winPercentageChart = new Chart(chartRow.find('canvas').first(), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    borderColor: "#3e95cd",
+                    fill: false,
+                    yAxisID: 'ZeroToHundred',
+                    xAxisID: 'Date'
+                }]
+            },
+            options: options
+        });
+
         this.dialog = new Dialog({
             header: this.name,
             body: [
-                Dialog.renderStatsRow('Games', stats.games),
+                Dialog.renderStatsRow('Games', stats.games.length),
                 Dialog.renderStatsRow('Wins', stats.wins),
-                Dialog.renderStatsRow('Losses', stats.losses)
-            ]
+                Dialog.renderStatsRow('Losses', stats.losses),
+                chartRow
+            ],
+            dialogShown: function () {
+
+            }
         });
 
         this.dialog.open();
@@ -85,24 +161,5 @@ class Player {
         var stats = this.seasons[seasonId];
 
         // TODO: OPEN DIALOG STATS
-    }
-}
-
-class PlayerStats {
-    constructor(playerId) {
-        this.player = playerId;
-        this.games = 0;
-        this.wins = 0;
-        this.losses = 0;
-    }
-
-    addGame(game) {
-        this.games++;
-
-        if (game.winners.includes(this.player)) {
-            this.wins++;
-        } else {
-            this.losses++;
-        }
     }
 }
