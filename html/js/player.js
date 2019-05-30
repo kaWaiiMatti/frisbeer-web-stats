@@ -78,7 +78,10 @@ class Player {
             scales: {
                 xAxes: [{
                     id: 'Date',
-                    type: 'time'
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    }
                 }],
                 yAxes: [{
                     id: 'ZeroToHundred',
@@ -98,45 +101,18 @@ class Player {
         let games = stats.games.map(gameId => fbc.data.games[gameId]);
         games.sort(fbc.base.sorting.date);
 
-        let labels = [];
-        let data = [];
-        let winPercentageStats = new PlayerStatsWinPercentage(this.id);
+        var stat = new PlayerWinPercentage(this, new XAxisDateEveryGame());
 
-        let previousDate = null;
+        games.forEach(game => {
+            stat.addGame(game);
+        })
 
-        games.forEach(function (game) {
-            // TODO: OMA LUOKKA ERILAISILLE LABELEILLE??
-            /*let year = game.date.getYear();
-            let month = game.date.getMonth();
-            let date = game.date.getDate();
-
-            if (previousDate !== null && previousDate.year === year && previousDate.month === month && previousDate.date === date) {
-                labels.pop();
-                winPercentageStats.pop();
-            }
-
-            previousDate = {
-                year: year,
-                month: month,
-                date: date
-            };*/
-
-            labels.push(game.date);
-            winPercentageStats.addGame(game);
-            data.push(winPercentageStats.getValue());
-        });
+        let dataSet1 = stat.getDataSet();
 
         let winPercentageChart = new Chart(chartRow.find('canvas').first(), {
             type: 'line',
             data: {
-                labels: labels,
-                datasets: [{
-                    data: data,
-                    borderColor: "#3e95cd",
-                    fill: false,
-                    yAxisID: 'ZeroToHundred',
-                    xAxisID: 'Date'
-                }]
+                datasets: [dataSet1]
             },
             options: options
         });
