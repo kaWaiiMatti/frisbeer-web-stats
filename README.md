@@ -1,1 +1,1 @@
-# frisbeer-web-stats
+# frisbeer-stats
