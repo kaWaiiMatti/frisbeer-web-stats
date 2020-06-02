@@ -1,0 +1,18 @@
+﻿@model SeasonViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Season @Model.Games.First().StartTime.Year</h1>
+</div>
+
+@foreach (var game in Model.Games.OrderByDescending(game => game.StartTime))
+{
+    <div class="row">
+        <div class="col-sm">@game.Name</div>
+        <div class="col-sm">@game.StartTime.ToString()</div>
+        <div class="col-sm">@string.Join(", ", game.Players.Select(player => player.Name))</div>
+    </div>
+}
