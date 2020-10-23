@@ -1,4 +1,12 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿$(document).ready(function () {
+    $('canvas').each(function () {
+        let $this = $(this);
+        
+        $this.parent().css('padding', 0);
+        
+        let context = this.getContext('2d');
+        let object = $this.data('chartJsObject');
+        
+        new Chart(context, object);
+    });
+});

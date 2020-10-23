@@ -1,18 +1,33 @@
-﻿@model SeasonViewModel
+﻿@using Newtonsoft.Json
+@model FrisbeerStats.Models.SeasonViewModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = $"Season {Model.Games.First().StartTime.Year}";
 }
 
 <div class="text-center">
     <h1 class="display-4">Season @Model.Games.First().StartTime.Year</h1>
 </div>
 
+<div class="text-center">
+    <h2 class="display-4">Games</h2>
+</div>
+
 @foreach (var game in Model.Games.OrderByDescending(game => game.StartTime))
 {
     <div class="row">
         <div class="col-sm">@game.Name</div>
-        <div class="col-sm">@game.StartTime.ToString()</div>
-        <div class="col-sm">@string.Join(", ", game.Players.Select(player => player.Name))</div>
+        <div class="col-sm">@game.StartTime.ToString("O")</div>
+        <div class="col-sm">@string.Join(", ", game.Players.Select(player => player.Name))</div>||
     </div>
 }
+
+<div class="text-center">
+    <h2 class="display-4">Charts</h2>
+</div>
+
+<div class="row">
+    <div class="col-sm">
+        <canvas data-chart-js-object="@JsonConvert.SerializeObject(Model.GameCountAggregation)"></canvas>
+    </div>
+</div>

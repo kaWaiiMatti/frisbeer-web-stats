@@ -1,7 +1,6 @@
 namespace FrisbeerStats.Models
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     /// Class for managing raw API data.
